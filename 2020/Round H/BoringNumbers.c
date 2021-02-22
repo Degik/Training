@@ -1,11 +1,18 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #define TRUE 1
 #define FALSE 0
+#define SIZE 20
+ 
+typedef char* string;
  
 long BoringNumbers(long L, long R) {
     long count = 0;
+    string s = malloc(sizeof(char)*SIZE);
     while (L <= R) {
-        if (CheckNumber(L)) {
+        sprintf(s, "%ld", L);
+        if (CheckNumber(L, s)) {
             count++;
         }
         L++;
@@ -13,30 +20,26 @@ long BoringNumbers(long L, long R) {
     return count;
 }
  
-int CheckNumber(long number) {
-    long pos = 1; long count = 0;
-    long mod;
-    long n = number;
-    while (n != 0) {
-        n /= 10;
-        ++count;
-    }
-    while (number > 0) {
-        mod = number % 10;
-        // Essendo che per splittare il numero parto dal fondo es: 234, prendera' 4 per primo
-        // Devo avere la posizione dal fondo
-        if (((pos - count) + 1) % 2 != 0) {
-            if (mod % 2 == 0) {
+int CharToInt(char c) {
+    return c - '0';
+}
+ 
+int CheckNumber(long number, string s) {
+    long pos = 1; int digit;
+    size_t n = strlen(s);
+    while (pos <= n) {
+        digit = CharToInt(s[pos - 1]);
+        if (pos % 2 != 0) {
+            if (digit % 2 == 0) {
                 return FALSE;
             }
         }
         else {
-            if (mod % 2 != 0) {
+            if (digit % 2 != 0) {
                 return FALSE;
             }
         }
         pos++;
-        number = number / 10;
     }
     return TRUE;
 }
