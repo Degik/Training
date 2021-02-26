@@ -4,6 +4,8 @@ import math
 import numpy as np
 import os
 
+#Authors: Davide, Erik, Turks95, Degik
+
 FILES = ["a.txt", "b.txt", "c.txt", "d.txt", "e.txt", "f.txt"]
 SCHEDULE_FILES = ["a_schedule.txt", "b_schedule.txt", "c_schedule.txt", "d_schedule.txt", "e_schedule.txt", "f_schedule.txt"]
 METHOD_DIR = "max-1/"
